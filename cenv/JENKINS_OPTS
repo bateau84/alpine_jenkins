@@ -1,0 +1,1 @@
+--prefix=/jenkins --httpListenAddress=0.0.0.0 --httpPort=8080 -Djava.awt.headless=true

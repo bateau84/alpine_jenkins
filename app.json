@@ -1,0 +1,63 @@
+{
+    "id": "/yrdevops/alpine-jenkins",
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "bateau/alpine_jenkins:latest",
+            "network": "BRIDGE",
+	    "forcePullImage": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 0,
+                    "protocol": "tcp"
+                }
+            ]
+        },
+	"volumes": [
+            {   
+                "containerPath": "/var/jenkins_home",
+                "hostPath": "/data/files/yr_jenkins",
+                "mode": "RW"
+            },
+	    {
+		"containerPath": "/var/run/docker.sock",
+		"hostPath": "/var/run/docker.sock",
+		"mode": "RO"
+	    },
+	    {
+		"containerPath": "/tmp",
+		"hostPath": "/tmp",
+		"mode": "RW"
+	    }
+        ]
+    },
+    "cpus": 0.1,
+    "mem": 2512.0,
+    "labels": {
+	"subdomain": "alpine-jenkins"
+    },
+    "env": {
+        "BAMBOO_SUBDOMAIN": "alpine-jenkins",
+	"PHOME": "/var/jenkins_home",
+	"PUID": "1000",
+	"PGID": "1000",
+	"PAGID": "999",
+	"JENKINS_HOME": "/var/jenkins_home",
+	"JENKINS_OPTS": "--spdy --httpListenAddress=0.0.0.0 --httpPort=8080 -Djava.awt.headless=true",
+	"JAVA_OPTS": "-Xmx2048m -Duser.timezone=Europe/Oslo",
+	"JENKINS_VERSION": "1.642.4",
+	"DOCKER_VERSION": "1.10.3",
+	"DOCKER_API_VERSION": "1.22",
+	"DOCKER_HOST": "unix:///var/run/docker.sock",
+	"DOCKER_TMPDIR": "/tmp/docker_tmp"
+    },
+    "instances": 1,
+    "backoffSeconds": 1040,
+    "backoffFactor": 3,
+    "maxLaunchDelaySeconds": 3600,
+    "upgradeStrategy": {
+        "minimumHealthCapacity": 1,
+        "maximumOverCapacity": 0
+    }
+}
