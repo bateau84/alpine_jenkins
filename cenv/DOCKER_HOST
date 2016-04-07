@@ -1,1 +1,1 @@
-tcp://localhost
+unix:///var/run/docker.sock
