@@ -3,7 +3,10 @@ set -e
 set -x
 
 DOCKER_VERSION=${DOCKER_VERSION:-"1.10.2"}
+DOCKER_DOWNLOAD=${DOCKER_DOWNLOAD:-"true"}
 
-## Download docker binary
-curl -sSLk https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION --output /usr/bin/docker
-chmod +x /usr/bin/docker
+if [ ${DOCKER_DOWNLOAD} == "true" ]; then
+	## Download docker binary
+	curl -sSLk https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION --output /usr/bin/docker
+	chmod +x /usr/bin/docker
+fi
