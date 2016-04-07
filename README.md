@@ -4,6 +4,8 @@ This builds Jenkins on an alpine based image.
 It downloads Jenkins (and docker) on runtime (to keep image size to a minimum).
 
 To controll jenkins and docker version use environment variables JENKINS_VERSION(=1.642.2) and DOCKER_VERSION(=1.10.2).
+If you want to download weekly build or for instance 2.0 version, you can disrecard JENKINS_VERSION variable and use JENKINS_ALT_VERSION to set different download url (fex: http://mirrors.jenkins-ci.org/war-rc/2.0/jenkins.war)
+
 There is no DinD (Docker in Docker) in this image. To build docker images you need to mount local docker.sock to container (-v /var/run/docker.sock:/var/run/docker.sock). To stop from downloading docker all together set DOCKER_DOWNLOAD(=true) to false.
 
 Jenkins starts by the user "abc". The ID and GID can be controlled by enviroment variable PUID and PGID. In addition you can set PAGID to prepend additionaly 1 group to the user (example 999 Docker group for docker.sock). The home directory is by default /home/abc. This can be changed with PHOME enviroment variable.

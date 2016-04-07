@@ -5,10 +5,15 @@ set -x
 JENKINS_WEB=${JENKINS_WEB:-"/usr/share/jenkins"}
 JENKINS_HOME=${JENKINS_HOME:-"/opt/jenkins_home"}
 JENKINS_VERSION=${JENKINS_VERSION:-"1.642.4"}
+JENKINS_ALT_DOWNLOAD=${JENKINS_ALT_DOWNLOAD:-"0"}
 
 # Download jenkins
 mkdir -p $JENKINS_WEB
-curl -sSL http://mirrors.jenkins-ci.org/war-stable/${JENKINS_VERSION:-"latest"}/jenkins.war -o $JENKINS_WEB/jenkins.war
+if [ ${JENKINS_ALT_DOWNLOAD} == "0" ]; then
+	curl -sSL http://mirrors.jenkins-ci.org/war-stable/${JENKINS_VERSION:-"latest"}/jenkins.war -o $JENKINS_WEB/jenkins.war
+else
+	curl -sSL ${JENKINS_ALT_DOWNLOAD} -o $JENKINS_WEB/jenkins.war
+fi
 
 # Make sure of right rights
 if [ ! -d ${JENKINS_HOME} ]; then
