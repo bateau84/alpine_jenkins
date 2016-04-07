@@ -4,10 +4,31 @@ set -x
 
 JENKINS_WEB=${JENKINS_WEB:-"/usr/share/jenkins"}
 JENKINS_HOME=${JENKINS_HOME:-"/opt/jenkins_home"}
-JENKINS_VERSION=${JENKINS_VERSION:-"1.642.2"}
+JENKINS_VERSION=${JENKINS_VERSION:-"1.642.4"}
 
 # Download jenkins
 mkdir -p $JENKINS_WEB
 curl -sSL http://mirrors.jenkins-ci.org/war-stable/${JENKINS_VERSION:-"latest"}/jenkins.war -o $JENKINS_WEB/jenkins.war
-chown abc:abc $JENKINS_WEB -R
-chown abc:abc $JENKINS_HOME
+
+# Make sure of right rights
+if [ ! -d ${JENKINS_HOME} ]; then
+        mkdir -p $JENKINS_HOME
+        chown abc:abc $JENKINS_HOME
+	chmod ugo-rwx,u+rwx,g+rx,o+rx $JENKINS_HOME
+else
+	chown abc:abc $JENKINS_HOME
+        chmod ugo-rwx,u+rwx,g+rx,o+rx $JENKINS_HOME
+fi
+
+if [ -d ${JENKINS_HOME}/war ]; then
+        rm -rf $JENKINS_HOME/war/*
+fi
+
+if [ ! -d ${JENKINS_HOME}/plugins ]; then
+        mkdir -p $JENKINS_HOME/plugins
+        chown abc:abc $JENKINS_HOME/plugins
+	chmod ugo-rwx,u+rwx,g+rx,o+rx $JENKINS_HOME/plugins
+else
+	chown abc:abc $JENKINS_HOME/plugins
+	chmod ugo-rwx,u+rwx,g+rx,o+rx $JENKINS_HOME/plugins
+fi

@@ -5,30 +5,6 @@ set -x
 JENKINS_HOME=${JENKINS_HOME:-"/opt/jenkins_home"}
 JENKINS_WEB=${JENKINS_WEB:-"/usr/share/jenkins"}
 
-if [ ! -d ${JENKINS_HOME} ]; then
-	mkdir $JENKINS_HOME
-	chown abc:abc $JENKINS_HOME
-fi
-
-if [ ! -d ${JENKINS_HOME}/war ]; then
-	mkdir $JENKINS_HOME/war
-	chown abc:abc $JENKINS_HOME/war
-fi
-
-if [ ! -d ${JENKINS_HOME}/plugins ]; then
-	mkdir $JENKINS_HOME/plugins
-	chown abc:abc $JENKINS_HOME/plugins
-fi
-
-if [ -d ${JENKINS_HOME}/.npm ]; then
-	rm -rf ${JENKINS_HOME}/.npm
-fi
-
-#time chown abc:abc ${JENKINS_HOME} -R
-#chown abc:abc $(find $JENKINS_HOME -type d)
-time find $JENKINS_HOME -type d -print0 | xargs -0 chown abc:abc
-time find $JENKINS_HOME -type d -print0 | xargs -0 chmod ugo-rwx,u+rwX,g+rwX,o+rX
-
 if [ -s "$JENKINS_WEB/jenkins.war" ]; then
 	exec /bin/setuser abc /usr/bin/java $JAVA_OPTS -jar $JENKINS_WEB/jenkins.war $JENKINS_OPTS "$@"
 else
