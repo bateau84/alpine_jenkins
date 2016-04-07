@@ -12,3 +12,8 @@ To change Java options on jenkins start use enviroment variable JAVA_OPTS.
 To change Jenkins options on start use enviroment variable JENKINS_OPTS.
 
 JENKINS_HOME is defailt /opt/jenkins_home. this enviroment variable can be changed.
+
+Example:
+```bash
+docker run -d -e PUID=1001 -e PGID=1001 -e PAGID=999 -e PHOME=/opt/jenkins_home -e JENKINS_VERSION=1.642.4 -e DOCKER_VERSION=1.10.3 -e "JAVA_OPTS=-Xmx2048m -Duser.timezone=Europe/Oslo" -e "JENKINS_OPTS=--spdy --httpListenAddress=0.0.0.0 --httpPort=8080 -Djava.awt.headless=true" bateau/alpine_jenkins:latest
+```
