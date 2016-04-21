@@ -5,7 +5,7 @@ This builds Jenkins on an alpine based image.
 It downloads Jenkins (and docker) on runtime (to keep image size to a minimum).  
 This also allows for more custom options to be set.
 
-To controll jenkins and docker versions use environment variables **JENKINS_VERSION**(=1.642.2) and **DOCKER_VERSION**(=1.10.2).  
+To controll jenkins and docker versions use environment variables **JENKINS_VERSION**(=1.642.2) and **DOCKER_VERSION**(=1.11.0).  
 **JENKINS_VERSION** only works with LTS version of jenkins.  
 If you want to download weekly build or for instance 2.0 version, you can disrecard **JENKINS_VERSION** variable and use **JENKINS_ALT_VERSION** to set different download url (fex: http://mirrors.jenkins-ci.org/war-rc/2.0/jenkins.war)
 
@@ -27,7 +27,7 @@ To change Jenkins options on start use enviroment variable **JENKINS_OPTS**.
 | JENKINS_HOME | "/opt/jenkins_home" | Home directory for jenkins |
 | JENKINS_WEB | "/usr/share/jenkins" | Destination to download war file to |
 | JAVA_OPTS | "" | Startup options to Java when Jenkins runs |
-| DOCKER_VERSION | "1.10.3" | Version of Docker to download |
+| DOCKER_VERSION | "1.11.0" | Version of Docker to download |
 | DOCKER_DOWNLOAD | "true" | whether or not do download Docker (to decrease startup time) |
 | DOCKER_HOST | "unix:///var/run/docker.sock" | Docker host variable to change where docker client will connect. See docker doc for more info. |
 | PUID | "1000" | To change UID of user to launch Jenkins |
