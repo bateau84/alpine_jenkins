@@ -21,7 +21,7 @@ To change Jenkins options on start use enviroment variable **JENKINS_OPTS**.
 ##### All Enviroment variables and its defaults:
 | Variable | Default | Desc. |
 |:---------|:--------|:------|
-| JENKINS_VERSION | 1.642.4 | Sets what stable version to download |
+| JENKINS_VERSION | 1.651.1 | Sets what stable version to download |
 | JENKINS_ALT_VERSION | 0 | To manually set download url |
 | JENKINS_OPTS | "--httpListenAddress=0.0.0.0 --httpPort=8080 -Djava.awt.headless=true" | Startup options for jenkins |
 | JENKINS_HOME | "/opt/jenkins_home" | Home directory for jenkins |
