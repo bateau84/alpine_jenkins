@@ -7,7 +7,7 @@ This also allows for more custom options to be set.
 
 To controll jenkins and docker versions use environment variables **JENKINS_VERSION**(=1.651.3) and **DOCKER_VERSION**(=1.12.1).  
 **JENKINS_VERSION** only works with LTS version of jenkins.  
-If you want to download weekly build or for instance 2.0 version, you can disrecard **JENKINS_VERSION** variable and use **JENKINS_ALT_VERSION** to set different download url (fex: http://mirrors.jenkins-ci.org/war-rc/2.0/jenkins.war)
+If you want to download weekly build or for instance 2.0 version, you can disrecard **JENKINS_VERSION** variable and use **JENKINS_ALT_DOWNLOAD** to set different download url (fex: http://mirrors.jenkins-ci.org/war-rc/2.0/jenkins.war)
 
 There is no DinD (Docker in Docker) in this image. To build docker images you need to mount local docker.sock to container (-v /var/run/docker.sock:/var/run/docker.sock). To stop from downloading docker all together set **DOCKER_DOWNLOAD**(=true) to false.
 
