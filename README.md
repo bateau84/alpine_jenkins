@@ -5,7 +5,7 @@ This builds Jenkins on an alpine based image.
 It downloads Jenkins (and docker) on runtime (to keep image size to a minimum).  
 This also allows for more custom options to be set.
 
-To controll jenkins and docker versions use environment variables **JENKINS_VERSION**(=1.651.3) and **DOCKER_VERSION**(=1.12.1).  
+To controll jenkins and docker versions use environment variables **JENKINS_VERSION**(=2.7.4) and **DOCKER_VERSION**(=1.12.1).  
 **JENKINS_VERSION** only works with LTS version of jenkins.  
 If you want to download weekly build or for instance 2.0 version, you can disrecard **JENKINS_VERSION** variable and use **JENKINS_ALT_DOWNLOAD** to set different download url (fex: http://mirrors.jenkins-ci.org/war-rc/2.0/jenkins.war)
 
@@ -21,7 +21,7 @@ To change Jenkins options on start use enviroment variable **JENKINS_OPTS**.
 ##### All Enviroment variables and its defaults:
 | Variable | Default | Desc. |
 |:---------|:--------|:------|
-| JENKINS_VERSION | 1.651.3 | Sets what stable version to download |
+| JENKINS_VERSION | 2.7.4 | Sets what stable version to download |
 | JENKINS_ALT_VERSION | 0 | To manually set download url |
 | JENKINS_OPTS | "--httpListenAddress=0.0.0.0 --httpPort=8080 -Djava.awt.headless=true" | Startup options for jenkins |
 | JENKINS_HOME | "/opt/jenkins_home" | Home directory for jenkins |
