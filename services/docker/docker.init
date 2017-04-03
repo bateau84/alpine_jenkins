@@ -2,7 +2,7 @@
 set -e
 set -x
 
-DOCKER_VERSION=${DOCKER_VERSION:-"17.03.0-ce"}
+DOCKER_VERSION=${DOCKER_VERSION:-"17.03.1-ce"}
 DOCKER_DOWNLOAD=${DOCKER_DOWNLOAD:-"true"}
 DOCKER_BUCKET=${DOCKER_BUCKET:-"get.docker.com"}
 
@@ -17,7 +17,7 @@ if [ ${DOCKER_DOWNLOAD} == "true" ]; then
 		fi
 		
 		mv docker/* /usr/bin/
-		rm -rf docker docker.tgz
+		rm -rf docker docker*.tgz
 	elif [[ ${DOCKER_VERSION} =~ ^[0-9]\.[0-9][1-9]\.[0-9]+$ ]]; then
 		curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz" -o docker.tgz
                 if [ -f docker.tgz ]; then
@@ -25,6 +25,9 @@ if [ ${DOCKER_DOWNLOAD} == "true" ]; then
                 else
                         tar zxvf docker-${DOKCER_VERSION}.tgz
                 fi
+
+		mv docker/* /usr/bin/
+		rm -rf docker docker*.tgz
 	else
 		curl -sSLk https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION --output /usr/bin/docker
 		chmod +x /usr/bin/docker
