@@ -2,13 +2,14 @@
 set -e
 set -x
 
-DOCKER_VERSION=${DOCKER_VERSION:-"17.03.1-ce"}
+DOCKER_VERSION=${DOCKER_VERSION:-"17.09.0-ce"}
 DOCKER_DOWNLOAD=${DOCKER_DOWNLOAD:-"true"}
-DOCKER_BUCKET=${DOCKER_BUCKET:-"get.docker.com"}
+DOCKER_BUCKET=${DOCKER_BUCKET:-"download.docker.com"}
 
 if [ ${DOCKER_DOWNLOAD} == "true" ]; then
 	## Download docker binary
-	if [[ ${DOCKER_VERSION} =~ ^[1-9][0-9]\.[0-9][1-9]\.[0-9].+$ ]]; then
+	if [[ ${DOCKER_VERSION} =~ ^[1-9][0-9]\.[0-9][1-5]\.[0-9].+$ ]]; then
+		DOCKER_BUGET="get.docker.com"
 		curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz" -o docker.tgz
 		if [ -f docker.tgz ]; then
 			tar -zxvf docker.tgz
@@ -18,7 +19,19 @@ if [ ${DOCKER_DOWNLOAD} == "true" ]; then
 		
 		mv docker/* /usr/bin/
 		rm -rf docker docker*.tgz
-	elif [[ ${DOCKER_VERSION} =~ ^[0-9]\.[0-9][1-9]\.[0-9]+$ ]]; then
+	elif [[ ${DOCKER_VERSION} =~ ^[1-9][0-9]\.[0-9][6-9]\.[0-9].+$ ]]; then
+		DOCKER_BUCKET="download.docker.com"
+		curl -fSL "https://${DOCKER_BUCKET}/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" -o docker.tgz
+                if [ -f docker.tgz ]; then
+                        tar -zxvf docker.tgz
+                else
+                        tar zxvf docker-${DOKCER_VERSION}.tgz
+                fi
+
+                mv docker/* /usr/bin/
+                rm -rf docker docker*.tgz
+	elif [[ ${DOCKER_VERSION} =~ ^[0-9]\.[0-9][1-5]\.[0-9]+$ ]]; then
+		DOCKER_BUCKET="get.docker.com"
 		curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz" -o docker.tgz
                 if [ -f docker.tgz ]; then
                         tar -zxvf docker.tgz
