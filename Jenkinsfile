@@ -10,7 +10,6 @@ pipeline {
         DOCKER_REPOSITORY = 'bateau'
         DOCKER_IMAGE_NAME = 'alpine_jenkins'
         DOCKER_ARGS = '--no-cache --squash '
-        DOCKER_IMAGE = ${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}
         GIT_COMMIT_ID = sh(returnStdout: true, script: "git rev-parse --short HEAD").trim()
         GIT_BRANCH = sh(returnStdout: true, script: "git rev-parse --abbrev-ref HEAD").replace(" ", "-").replace("/", "-").replace(".", "-")
     }
