@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 script {
-                    def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.BRANCH_NAME}-${env.BUILD_ID}", "${env.DOCKER_ARGS}.")
+                    def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.BRANCH_NAME}-${env.COMMIT_ID}", "${env.DOCKER_ARGS}.")
                     baseimage.push()
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 script {
-                    def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.BUILD_ID}", "${env.DOCKER_ARGS}.")
+                    def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.COMMIT_ID}", "${env.DOCKER_ARGS}.")
                     baseimage.push()
                     baseimage.push('latest')
                 }
