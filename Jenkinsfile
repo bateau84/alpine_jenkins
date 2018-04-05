@@ -10,6 +10,7 @@ pipeline {
         DOCKER_REPOSITORY = 'bateau'
         DOCKER_IMAGE_NAME = 'alpine_jenkins'
         DOCKER_ARGS = '--no-cache --squash '
+        DOCKER_IMAGE = ${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}
         GIT_COMMIT_ID = sh(returnStdout: true, script: "git rev-parse --short HEAD").trim()
         GIT_BRANCH = sh(returnStdout: true, script: "git rev-parse --abbrev-ref HEAD").replace(" ", "-").replace("/", "-").replace(".", "-")
     }
@@ -32,6 +33,7 @@ pipeline {
                 script {
                     def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.GIT_BRANCH}-${env.GIT_COMMIT_ID}", "${env.DOCKER_ARGS}.")
                     baseimage.push()
+                    env.imageName = baseimage.imageName()
                 }
             }
         }
@@ -45,6 +47,7 @@ pipeline {
                     def baseimage = docker.build("${env.DOCKER_REGISTRY}${env.DOCKER_REPOSITORY}/${env.DOCKER_IMAGE_NAME}:${env.GIT_COMMIT_ID}", "${env.DOCKER_ARGS}.")
                     baseimage.push()
                     baseimage.push('latest')
+                    env.imageName = baseimage.imageName()
                 }
             }
         }
@@ -52,6 +55,9 @@ pipeline {
     post {
         always {
             deleteDir()
+        }
+        success {
+            sh("docker rmi -f ${imageName}")
         }
     }
 }
