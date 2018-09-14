@@ -1,4 +1,4 @@
-FROM bateau/alpine_openjdk:latest
+FROM bateau/alpine_openjdk:8
 
 ENV JENKINS_HOME /opt/jenkins_home
 ENV JENKINS_WEB /usr/share/jenkins
